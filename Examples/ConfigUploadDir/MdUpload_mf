@@ -1,0 +1,22 @@
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -std=c99 -pedantic -c $(DEBUG)
+LFLAGS = -Wall -std=c99 -pedantic $(DEBUG)
+
+UploadMD : UploadMD_main.o MetaDataAccess.o StringUtils.o 
+	$(CC) $(LFLAGS) UploadMD_main.o MetaDataAccess.o StringUtils.o -o UploadMD
+
+UploadMD_main.o : UploadMD_main.c
+	$(CC) $(CFLAGS) UploadMD_main.c
+
+StringUtils.o : StringUtils.c StringUtils.h
+	$(CC) $(CFLAGS) StringUtils.c
+
+
+MetaDataAccess.o : MetaDataAccess.c MetaDataAccess.h
+	$(CC) $(CFLAGS) MetaDataAccess.c
+
+clean:
+	\rm *.o *.*~ UploadMD
+
+

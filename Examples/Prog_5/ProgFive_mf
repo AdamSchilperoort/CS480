@@ -1,0 +1,18 @@
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -std=c99 -pedantic -c $(DEBUG)
+LFLAGS = -Wall -std=c99 -pedantic $(DEBUG)
+
+strTestProg : prog_5.o StringUtils.o
+	$(CC) $(LFLAGS) prog_5.o StringUtils.o -o strTestProg
+
+prog_5.o : prog_5.c StringUtils.h
+	$(CC) $(CFLAGS) prog_5.c
+
+StringUtils.o : StringUtils.c StringUtils.h
+	$(CC) $(CFLAGS) StringUtils.c
+
+clean:
+	\rm *.o strTestProg
+
+

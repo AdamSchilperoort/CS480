@@ -1,0 +1,2 @@
+
+int getStringLength( char *testStr );

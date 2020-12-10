@@ -1,0 +1,47 @@
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -std=c99 -pedantic -c $(DEBUG) -pthread
+LFLAGS = -Wall -std=c99 -pedantic $(DEBUG) -pthread -o
+PROG_O_DEPS = main.o pcb.o errors.o dataUpload.o logFileUtils.o mathUtils.o memoryManagement.o scheduler.o simulator.o strUtils.o simtimer.o
+PROG_H_DEPS = booleans.h pcb.h errors.h dataUpload.h logFileUtils.h mathUtils.h memoryManagement.h scheduler.h simulator.h strUtils.h simtimer.h
+SIM_NAME = sim03
+
+sim0x: $(PROG_O_DEPS) $(PROG_H_DEPS)
+	$(CC) $(LFLAGS) $(SIM_NAME) $(PROG_O_DEPS)
+
+main.o: main.c booleans.h pcb.h errors.h dataUpload.h logFileUtils.h simulator.h strUtils.h simtimer.h
+	$(CC) $(CFLAGS) main.c
+
+pcb.o: pcb.c booleans.h pcb.h errors.h strUtils.h
+	$(CC) $(CFLAGS) pcb.c
+
+errors.o: errors.c errors.h
+	$(CC) $(CFLAGS) errors.c
+
+dataUpload.o: dataUpload.c booleans.h pcb.h errors.h dataUpload.h strUtils.h 
+	$(CC) $(CFLAGS) dataUpload.c
+
+logFileUtils.o: logFileUtils.c pcb.h errors.h logFileUtils.h strUtils.h
+	$(CC) $(CFLAGS) logFileUtils.c
+
+mathUtils.o: mathUtils.c mathUtils.h
+	$(CC) $(CFLAGS) mathUtils.c
+
+memoryManagement.o: memoryManagement.c booleans.h pcb.h memoryManagement.h simtimer.h
+	$(CC) $(CFLAGS) memoryManagement.c
+
+scheduler.o: scheduler.c scheduler.h strUtils.h
+	$(CC) $(CFLAGS) scheduler.c
+
+simulator.o: simulator.c pcb.h scheduler.h simulator.h 
+	$(CC) $(CFLAGS) simulator.c
+
+strUtils.o: strUtils.c booleans.h errors.h mathUtils.h strUtils.h
+	$(CC) $(CFLAGS) strUtils.c
+
+simtimer.o: simtimer.c simtimer.h
+	$(CC) $(CFLAGS) simtimer.c
+
+
+clean:
+	\rm *.o $(SIM_NAME)

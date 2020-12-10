@@ -1,0 +1,10 @@
+CC = gcc
+DEBUG = -g
+LFLAGS = -Wall -std=c99 -pedantic $(DEBUG)
+
+strTest_1 : prog_4.c
+	$(CC) $(LFLAGS) prog_4.c -o strTest_1
+
+clean:
+	\rm strTest_1
+
